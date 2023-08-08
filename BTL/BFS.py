@@ -1,5 +1,6 @@
 from BTL import TaCanh
 import copy
+import math
 from timeit import default_timer
 
 
@@ -94,3 +95,6 @@ def output(option, mode):
     print("Time passed:", time, "ms")
     print("Total step processed:", count)
     print("finish")
+
+output((1, TaCanh.shuffle(TaCanh.goal(3), 10)), 1)
+

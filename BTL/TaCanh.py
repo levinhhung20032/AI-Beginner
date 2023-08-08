@@ -47,7 +47,31 @@ def customize(size):
     return temp
 
 
-def shuffle(tacanh, step):
+def shuffle(tacanh, steps):
+    temp = copy.copy(tacanh)
+    count = 0
+    diary = [temp]
+    n = int(math.sqrt(len(temp)))
+    while count < steps:
+        blank = temp.index(len(temp))
+        direction = random.randint(0, 3)
+        if blank < n * (n - 1) and direction == 0 and down(temp) not in diary:
+            temp = down(temp)
+            diary.append(temp)
+            count += 1
+        if blank >= n and direction == 1 and up(temp) not in diary:
+            temp = up(temp)
+            diary.append(temp)
+            count += 1
+        if blank % n != 0 and direction == 2 and left(temp) not in diary:
+            temp = left(temp)
+            diary.append(temp)
+            count += 1
+        if blank % n != n - 1 and direction == 3 and right(temp) not in diary:
+            temp = right(temp)
+            diary.append(temp)
+            count += 1
+    return temp
 
 
 def up(a):
