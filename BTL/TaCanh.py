@@ -5,10 +5,15 @@ import math
 import time
 
 
-def randomize(size):
+def goal(size):
     tacanh = []
     for i in range(size ** 2):
         tacanh.append(i + 1)
+    return tacanh
+
+
+def randomize(size):
+    tacanh = goal(size)
     random.shuffle(tacanh)
     show(tacanh)
     return tacanh
@@ -40,6 +45,9 @@ def customize(size):
     print(count, "steps:", temp)
     print(temp)
     return temp
+
+
+def shuffle(tacanh, step):
 
 
 def up(a):
