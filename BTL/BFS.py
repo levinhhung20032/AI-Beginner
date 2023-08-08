@@ -1,4 +1,4 @@
-from NhapMonAI_BTL import TaCanh
+from BTL import TaCanh
 import copy
 from timeit import default_timer
 
