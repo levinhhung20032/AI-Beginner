@@ -84,33 +84,38 @@ def Best_First_Search(a, mode):
     count = 0
 
     while True:
+        # Nếu thời gian xử lý vượt quá 30s hoặc đã vét cạn, chương trình sẽ coi trạng thái không thể giải
         if (default_timer() - start) * 1000 > 30000 or moves.is_empty():
             return "Unsolvable!", (default_timer() - start) * 1000, count
         else:
             count += 1
-            item = moves.pop()
+            item = moves.pop()  # Xét trạng thái có mức ưu tiên cao nhất (hàm đánh giá trả về kết quả nhỏ nhất)
             status.append(item)
             diary.append(item[0])
             if item[0] != goal_tacanh:
+                # Nếu chưa tìm thấy trạng thái đích, tiếp tục thêm những trạng thái con vào hàng đợi
                 temp = TaCanh.possible_moves(item[0])
                 temp = check(temp, diary, mode)
-                for i in temp:
+                for i in temp:  # Đưa tất cả trạng thái con vào hàng đợi ưu tiên
                     moves.push(i, grading(i))
             else:
-                path.append(item)
+                path.append(item)  # Nếu tìm thấy trạng thái đích, thêm trạng thái đích vào đường dẫn
                 break
 
+    # Đảo ngược nhật ký để tìm đường dẫn
     status.reverse()
 
     temp = goal_tacanh
-    for i in status:
+    for i in status:  # Truy ngược từ trạng thái đích về trạng thái ban đầu dựa vào nhật kí trạng thái
         if i[0] == temp:
             temp = redirect(i)
             path.append(i)
         elif temp is None:
             break
 
+    # Đảo ngược đường dẫn (Do đường dẫn đang chỉ từ trạng thái đích về trạng thái ban đầu)
     path.reverse()
+    # Bỏ trạng thái ban đầu khỏi đường dẫn
     path.pop()
     return path, (default_timer() - start) * 1000, count
 

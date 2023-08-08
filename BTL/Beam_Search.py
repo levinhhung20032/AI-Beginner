@@ -82,45 +82,51 @@ def Beam_Search(a, mode):
     count = 0
 
     while True:
+        # Nếu thời gian xử lý vượt quá 30s hoặc đã vét cạn, chương trình sẽ coi trạng thái không thể giải
         if (default_timer() - start) * 1000 > 30000 or moves.is_empty():
             return "Unsolvable!", (default_timer() - start) * 1000, count
         else:
             temp_list = PriorityQueue()
-            for j in range(k):
+            for j in range(k):  # Chỉ xét k trạng thái có mức ưu tiên cao nhất
                 if not moves.is_empty():
                     count += 1
-                    item = moves.pop()
+                    item = moves.pop()  # Xét trạng thái có mức ưu tiên cao nhất (hàm đánh giá trả về kết quả nhỏ nhất)
                     status.append(item)
                     diary.append(item[0])
                     if item[0] != goal_tacanh:
+                        # Nếu chưa tìm thấy trạng thái đích, tiếp tục thêm những trạng thái con vào hàng đợi
                         temp = TaCanh.possible_moves(item[0])
                         temp = check(temp, diary, mode)
-                        for i in temp:
+                        for i in temp:  # Đưa tất cả trạng thái con vào hàng đợi ưu tiên
                             temp_list.push(i, grading(i))
                     else:
-                        path.append(item)
+                        path.append(item)  # Nếu tìm thấy trạng thái đích, thêm trạng thái đích vào đường dẫn
                         break
                 else:
                     continue
             else:
+                # Nếu vòng lặp for kết thúc, xóa các trạng thái cũ khỏi hàng đợi, chỉ xét k trạng thái ưu tiên cao nhất
                 moves.clear()
                 for i in range(min(k, temp_list.size())):
                     item = temp_list.pop()
                     moves.push(item, grading(item))
                 continue
-            break
+            break  # Thoát vòng lặp while khi đã tìm thấy trạng thái đích
 
+    # Đảo ngược nhật ký để tìm đường dẫn
     status.reverse()
 
     temp = goal_tacanh
-    for i in status:
+    for i in status:  # Truy ngược từ trạng thái đích về trạng thái ban đầu dựa vào nhật kí trạng thái
         if i[0] == temp:
             temp = redirect(i)
             path.append(i)
         elif temp is None:
             break
 
+    # Đảo ngược đường dẫn (Do đường dẫn đang chỉ từ trạng thái đích về trạng thái ban đầu)
     path.reverse()
+    # Bỏ trạng thái ban đầu khỏi đường dẫn
     path.pop()
     return path, (default_timer() - start) * 1000, count
 

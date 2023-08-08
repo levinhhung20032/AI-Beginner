@@ -59,7 +59,7 @@ def BFS(a, mode):
                     path.append(i)  # Nếu tìm thấy trạng thái đích, thêm trạng thái đích vào đường dẫn
                     break
                 else:
-                    # Nếu chưa tìm thấy trạng thái đích, tiếp thục thêm những trạng thái con vào hàng đợi
+                    # Nếu chưa tìm thấy trạng thái đích, tiếp tục thêm những trạng thái con vào hàng đợi
                     possible_moves = TaCanh.possible_moves(i[0])
                     moves += check(possible_moves, diary, mode)
 
