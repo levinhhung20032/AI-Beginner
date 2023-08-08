@@ -4,6 +4,7 @@ import math
 from timeit import default_timer
 
 
+# Hàm tái định hướng
 def redirect(a):
     if a[1] == "up":
         return TaCanh.down(a[0])
@@ -17,6 +18,7 @@ def redirect(a):
         return None
 
 
+# Hàm kiểm tra tính lặp của trạng thái, trả về danh sách trạng thái đã bỏ lặp
 def check(possible_list, diary, option):
     if option == 1:
         # Option 1: remove existed scenario
@@ -26,10 +28,11 @@ def check(possible_list, diary, option):
                 back_list.append(i)
         return back_list
     elif option == 2:
-        # Option 2: normal BFS
+        # Option 2: normal
         return possible_list
 
 
+# Chiến lược tìm kiếm BFS
 def BFS(a, mode):
     temp = copy.copy(a)
     temp.sort()
@@ -42,19 +45,21 @@ def BFS(a, mode):
     count = 0
 
     while True:
+        # Nếu thời gian xử lý vượt quá 30s hoặc đã vét cạn, chương trình sẽ coi trạng thái không thể giải
         if (default_timer() - start) * 1000 > 30000 or moves == []:
             return "Unsolvable!", (default_timer() - start) * 1000, count
         else:
             prev_moves = copy.copy(moves)
-            status += prev_moves
+            status += prev_moves  # Nhật kí trạng thái ghi lại những trạng thái đã được xét
             moves = []
             for i in prev_moves:
                 count += 1
                 diary.append(i[0])
                 if i[0] == goal_tacanh:
-                    path.append(i)
+                    path.append(i)  # Nếu tìm thấy trạng thái đích, thêm trạng thái đích vào đường dẫn
                     break
                 else:
+                    # Nếu chưa tìm thấy trạng thái đích, tiếp thục thêm những trạng thái con vào hàng đợi
                     possible_moves = TaCanh.possible_moves(i[0])
                     moves += check(possible_moves, diary, mode)
 
@@ -62,21 +67,25 @@ def BFS(a, mode):
                 continue
             break
 
+    # Đảo ngược nhật ký để tìm đường dẫn
     status.reverse()
 
     temp = goal_tacanh
-    for i in status:
+    for i in status:  # Truy ngược từ trạng thái đích về trạng thái ban đầu dựa vào nhật kí trạng thái
         if i[0] == temp:
             temp = redirect(i)
             path.append(i)
         elif temp is None:
             break
 
+    # Đảo ngược đường dẫn (Do đường dẫn đang chỉ từ trạng thái đích về trạng thái ban đầu)
     path.reverse()
+    # Bỏ trạng thái ban đầu khỏi đường dẫn
     path.pop()
     return path, (default_timer() - start) * 1000, count
 
 
+# Hàm in ra kết quả thuật toán
 def output(option, mode):
     if option[0] == 1:
         # Option 1: Wanted scenario input

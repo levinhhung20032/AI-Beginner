@@ -5,6 +5,7 @@ from timeit import default_timer
 import heapq
 
 
+# Priority Queue, sử dụng để trả về phần tử có độ ưu tiên cao nhất mà không cần sắp xếp toàn bộ mảng
 class PriorityQueue:
     def __init__(self):
         self.heap = []
@@ -27,6 +28,7 @@ class PriorityQueue:
         return len(self.heap)
 
 
+# Hàm tái định hướng
 def redirect(a):
     if a[1] == "up":
         return TaCanh.down(a[0])
@@ -40,6 +42,7 @@ def redirect(a):
         return None
 
 
+# Hàm kiểm tra tính lặp của trạng thái, trả về danh sách trạng thái đã bỏ lặp
 def check(possible_list, diary, option):
     if option == 1:
         # Option 1: remove existed scenario
@@ -49,10 +52,11 @@ def check(possible_list, diary, option):
                 back_list.append(i)
         return back_list
     elif option == 2:
-        # Option 2: normal Best-First Search
+        # Option 2: normal
         return possible_list
 
 
+# Hàm đánh giá
 def grading(tacanh):
     grade = 0
     n = int(math.sqrt(len(tacanh[0])))
@@ -63,6 +67,7 @@ def grading(tacanh):
     return grade
 
 
+# Chiến lược tìm kiếm beam
 def Beam_Search(a, mode):
     temp = copy.copy(a)
     temp.sort()
@@ -120,6 +125,7 @@ def Beam_Search(a, mode):
     return path, (default_timer() - start) * 1000, count
 
 
+# Hàm in ra kết quả thuật toán
 def output(option, mode):
     if option[0] == 1:
         # Option 1: Wanted scenario input

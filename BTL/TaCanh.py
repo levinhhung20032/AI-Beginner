@@ -5,6 +5,7 @@ import math
 import time
 
 
+# Hàm trả về trạng thái đích theo kích thước truyền vào
 def goal(size):
     tacanh = []
     for i in range(size ** 2):
@@ -12,6 +13,7 @@ def goal(size):
     return tacanh
 
 
+# Hàm trả về một trạng thái ngẫu nhiên theo kích thước truyền vào (có thể trả về trường hợp không thể giải được)
 def randomize(size):
     tacanh = goal(size)
     random.shuffle(tacanh)
@@ -19,6 +21,7 @@ def randomize(size):
     return tacanh
 
 
+# Hàm giúp người dùng tự tạo trạng thái mong muốn với kích thước truyền vào
 def customize(size):
     x = None
     count = 0
@@ -47,6 +50,7 @@ def customize(size):
     return temp
 
 
+# Hàm trả về một trạng thái được tráo ngẫu nhiên từ trạng thái truyền vào với số lần tráo mong muốn
 def shuffle(tacanh, steps):
     temp = copy.copy(tacanh)
     count = 0
@@ -74,6 +78,7 @@ def shuffle(tacanh, steps):
     return temp
 
 
+# Hàm trả về trạng thái nếu ô trống di chuyển lên trên so với trạng thái truyền vào
 def up(a):
     temp_tacanh = copy.copy(a)
     n = int(math.sqrt(len(a)))
@@ -83,6 +88,7 @@ def up(a):
     return temp_tacanh
 
 
+# Hàm trả về trạng thái nếu ô trống di chuyển xuống dưới so với trạng thái truyền vào
 def down(a):
     temp_tacanh = copy.copy(a)
     n = int(math.sqrt(len(a)))
@@ -92,6 +98,7 @@ def down(a):
     return temp_tacanh
 
 
+# Hàm trả về trạng thái nếu ô trống di chuyển sang trái so với trạng thái truyền vào
 def left(a):
     temp_tacanh = copy.copy(a)
     n = int(math.sqrt(len(a)))
@@ -101,6 +108,7 @@ def left(a):
     return temp_tacanh
 
 
+# Hàm trả về trạng thái nếu ô trống di chuyển sang phải so với trạng thái truyền vào
 def right(a):
     temp_tacanh = copy.copy(a)
     n = int(math.sqrt(len(a)))
@@ -110,6 +118,7 @@ def right(a):
     return temp_tacanh
 
 
+# Hàm trả về danh sách các trạng thái có thể được sinh ra từ trạng thái truyền vào
 def possible_moves(a):
     temp_tacanh = copy.copy(a)
     n = int(math.sqrt(len(a)))
@@ -126,6 +135,7 @@ def possible_moves(a):
     return possible_list
 
 
+# Hàm thể hiện trạng thái dưới dạng bài toán Ta Canh
 def show(a):
     temp_tacanh = copy.copy(a)
     n = int(math.sqrt(len(a)))

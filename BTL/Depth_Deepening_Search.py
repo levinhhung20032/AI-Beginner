@@ -4,6 +4,7 @@ import math
 from timeit import default_timer
 
 
+# Hàm tái định hướng
 def redirect(a):
     if a[1] == "up":
         return TaCanh.down(a[0])
@@ -17,6 +18,7 @@ def redirect(a):
         return None
 
 
+# Hàm kiểm tra tính lặp của trạng thái, trả về danh sách trạng thái đã bỏ lặp
 def check(possible_list, diary, option):
     if option == 1:
         # Option 1: remove existed scenario
@@ -26,10 +28,11 @@ def check(possible_list, diary, option):
                 back_list.append(i)
         return back_list
     elif option == 2:
-        # Option 2: normal Depth Deepening Search
+        # Option 2: normal
         return possible_list
 
 
+# Hàm đính kèm độ sâu của trạng thái
 def depth(possible_list, depth):
     temp = []
     for i in possible_list:
@@ -37,6 +40,7 @@ def depth(possible_list, depth):
     return temp
 
 
+# Chiến lược tìm kiếm sâu lặp
 def Depth_Deepening_Search(a, mode):
     temp = copy.copy(a)
     temp.sort()
@@ -98,6 +102,7 @@ def Depth_Deepening_Search(a, mode):
     return path, (default_timer() - start) * 1000, count
 
 
+# Hàm in ra kết quả thuật toán
 def output(option, mode):
     if option[0] == 1:
         # Option 1: Wanted scenario input
