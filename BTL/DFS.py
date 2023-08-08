@@ -41,8 +41,8 @@ def DFS(a, mode):
     count = 0
 
     while True:
-        if (default_timer() - start)*1000 > 30000 or moves == []:
-            return "Unsolvable!", (default_timer() - start)*1000, count
+        if (default_timer() - start) * 1000 > 30000 or moves == []:
+            return "Unsolvable!", (default_timer() - start) * 1000, count
         else:
             prev_moves = copy.copy(moves)
             status += prev_moves
@@ -71,7 +71,7 @@ def DFS(a, mode):
 
     path.reverse()
     path.pop()
-    return path, (default_timer() - start)*1000, count
+    return path, (default_timer() - start) * 1000, count
 
 
 def output(option, mode):

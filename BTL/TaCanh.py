@@ -99,20 +99,18 @@ def show(a):
     n = int(math.sqrt(len(a)))
     print("-", end="")
     for x in range(n):
-        print("-" * (len(str(n ** 2))+2), end="-")
+        print("-" * (len(str(n ** 2)) + 2), end="-")
     print()
     for y in range(n):
         print("|", end="")
         for x in range(n):
             if temp_tacanh[y * n + x] == n ** 2:
-                print(" " * (len(str(n ** 2))+2), end="|")
+                print(" " * (len(str(n ** 2)) + 2), end="|")
             else:
                 print(" " * (len(str(n ** 2)) + 1 - len(str(temp_tacanh[y * n + x]))), end="")
                 print("%d " % temp_tacanh[y * n + x], end="|")
         print()
         print("-", end="")
         for x in range(n):
-            print("-" * (len(str(n ** 2))+2), end="-")
+            print("-" * (len(str(n ** 2)) + 2), end="-")
         print()
-
-customize(4)
