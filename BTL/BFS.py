@@ -95,6 +95,3 @@ def output(option, mode):
     print("Time passed:", time, "ms")
     print("Total step processed:", count)
     print("finish")
-
-output((1, TaCanh.shuffle(TaCanh.goal(3), 10)), 1)
-
